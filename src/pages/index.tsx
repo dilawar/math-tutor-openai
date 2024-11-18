@@ -51,7 +51,7 @@ export default function Home() {
             id="screenshot_uploader"
             accept="image/*"
             maxFileSize={1000000}
-            multiple="false"
+            multiple={false}
             chooseLabel="Browse/Take Photo"
             customUpload
             uploadHandler={openApiUploader}
