@@ -5,26 +5,26 @@ import OpenAI from 'openai';
 
 const openai = new OpenAI();
 
-// Thanks https://stackoverflow.com/a/24526156/1805129
-function base64_encode(file) {
-  var bitmap = fs.readFileSync(file);
-  return new Buffer(bitmap).toString('base64');
-}
-
 async function main() {
-  const screenshort_of_math_prob = base64_encode('../data/quad.png');
-  console.log('base64 encoding of image: ', screenshort_of_math_prob);
+  // Thanks https://stackoverflow.com/a/46616561/1805129
+  const filepath = '../data/quad.png';
+  const imageType = 'png'; // FIXME: should get it from file.
+  const screenshort_of_math_prob =
+    `data:image/${imageType};base64,` + fs.readFileSync(filepath, 'base64');
 
   // Using https://platform.openai.com/docs/guides/vision?lang=node
   const response = await openai.chat.completions.create({
     model: 'gpt-4o',
-    message: [
+    messages: [
       {
         role: 'user',
         content: [
-          { type: 'text', text: 'Solve the problem in the image' },
           {
-            type: 'image',
+            type: 'text',
+            text: 'Solve the problem in the image. Show the step-by-step solution. Write a maxima program to verify the solution. Return response in JSON.'
+          },
+          {
+            type: 'image_url',
             image_url: {
               url: screenshort_of_math_prob
             }
@@ -33,7 +33,9 @@ async function main() {
       }
     ]
   });
-  console.log('response: ', response);
+
+  const first_choice = response.choices[0];
+  console.log('response: ', first_choice);
 }
 
 main();
