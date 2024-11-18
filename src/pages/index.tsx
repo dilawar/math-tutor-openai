@@ -6,25 +6,21 @@ import Link from 'next/link';
 import { FileUpload } from 'primereact/fileupload';
 import { Toast } from 'primereact/toast';
 
-import { api } from '~/utils/api';
+// import { api } from '~/utils/api';
 
 export default function Home() {
-  const hello = api.post.hello.useQuery({ text: 'from tRPC' });
+  // const hello = api.post.hello.useQuery({ text: 'from tRPC' });
   const toast = useRef(null);
 
   const openApiUploader = async (event) => {
+    console.log('Upload image event: }', event);
     const file = event.files[0];
-    console.log('Upload event', file);
     const reader = new FileReader();
     let blob = await fetch(file.objectUrl).then((r) => r.blob());
     reader.readAsDataURL(blob);
-
-    reader.onloaded = function () {
-      toast.current.show({
-        severity: 'info',
-        summary: 'Waiting for solution...',
-        detail: 'Your problem shall be answered shortly'
-      });
+    reader.onloadend = function () {
+      const base64data = reader.result;
+      console.log('Uploaded image base64: ', base64data);
     };
   };
 
@@ -46,15 +42,17 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="card flex justify-content-center text-white text-5xl">
+        <div className="flex justify-content-center text-white">
           <Toast ref={toast}></Toast>
           <FileUpload
             mode="basic"
+            url="api/upload"
             name="math_tutor[]"
+            id="screenshot_uploader"
             accept="image/*"
             maxFileSize={1000000}
-            auto
-            chooseLabel="Upload Screenshot"
+            multiple="false"
+            chooseLabel="Browse/Take Photo"
             customUpload
             uploadHandler={openApiUploader}
           />
