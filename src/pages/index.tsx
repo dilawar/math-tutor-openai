@@ -26,7 +26,7 @@ export default function Home() {
             Math Made <span className="text-[hsl(280,100%,70%)]">Easy</span>
           </h1>
           <div className="text text-white">
-              Take a photo of your math problem and get step-by-step solutions instantly
+              π/ Take a photo of your math problem and get step-by-step solutions instantly /π
           </div>
         </div>
 
