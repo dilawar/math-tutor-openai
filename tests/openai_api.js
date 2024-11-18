@@ -18,10 +18,13 @@ async function main() {
     messages: [
       {
         role: 'user',
+        // TODO: Perhaps, I can use zod in production! (Postel) Be strict in what you
+        // send...
+        response_format: { type: 'json_object' },
         content: [
           {
             type: 'text',
-            text: 'Solve the problem in the image. Show the step-by-step solution. Write a maxima program to verify the solution. Return response in JSON.'
+            text: 'Solve the problem in the image. Show the step-by-step solution. Write a maxima program to verify the solution. Return your response in JSON format.'
           },
           {
             type: 'image_url',
