@@ -1,3 +1,8 @@
+# Notes
+
+- Available here https://dilawars.notion.site/Astral-Take-Home-142e579bff8980f79cd4dfdc1f2afa3f?pvs=4
+
+
 # Create T3 App
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
