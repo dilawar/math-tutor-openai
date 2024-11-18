@@ -1,0 +1,32 @@
+response:  {
+  index: 0,
+  message: {
+    role: 'assistant',
+    content: '```json\n' +
+      '{\n' +
+      '  "solution": {\n' +
+      '    "equation": "9x^2 + 13x - 6 = 0",\n' +
+      '    "step_by_step_solution": [\n' +
+      '      "Identify coefficients in the quadratic equation ax^2 + bx + c = 0: a = 9, b = 13, c = -6.",\n' +
+      '      "Calculate the discriminant: D = b^2 - 4ac = (13)^2 - 4(9)(-6) = 169 + 216 = 385.",\n' +
+      '      "Since the discriminant is positive, there are two real roots.",\n' +
+      '      "Use the quadratic formula to find the roots: x = [-b ± sqrt(D)] / (2a).",\n' +
+      '      "Calculate the roots:",\n' +
+      '      "x1 = [-13 + sqrt(385)] / 18",\n' +
+      '      "x2 = [-13 - sqrt(385)] / 18"\n' +
+      '    ],\n' +
+      '    "approximate_roots": [\n' +
+      '      {\n' +
+      '        "x1": 0.331,\n' +
+      '        "x2": -2.014\n' +
+      '      }\n' +
+      '    ]\n' +
+      '  },\n' +
+      '  "maxima_program": "/* Maxima program to solve the quadratic equation */\\nsolve(9*x^2 + 13*x - 6 = 0, x);"\n' +
+      '}\n' +
+      '```',
+    refusal: null
+  },
+  logprobs: null,
+  finish_reason: 'stop'
+}
