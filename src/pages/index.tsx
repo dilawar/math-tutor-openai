@@ -1,16 +1,32 @@
-import { signIn, signOut, useSession } from 'next-auth/react';
+import React, { useRef } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
 // This is what I found on npmjs.com. Not sure if it is great or not!
-import { UploadDropzone } from '@bytescale/upload-widget-react';
+import { FileUpload } from 'primereact/fileupload';
+import { Toast } from 'primereact/toast';
 
 import { api } from '~/utils/api';
 
-const options = { apiKey: 'free', maxFileCount: 1, width: "600px", height: "375px"};
-
 export default function Home() {
   const hello = api.post.hello.useQuery({ text: 'from tRPC' });
+  const toast = useRef(null);
+
+  const openApiUploader = async (event) => {
+    const file = event.files[0];
+    console.log('Upload event', file);
+    const reader = new FileReader();
+    let blob = await fetch(file.objectUrl).then((r) => r.blob());
+    reader.readAsDataURL(blob);
+
+    reader.onloaded = function () {
+      toast.current.show({
+        severity: 'info',
+        summary: 'Waiting for solution...',
+        detail: 'Your problem shall be answered shortly'
+      });
+    };
+  };
 
   return (
     <>
@@ -26,18 +42,21 @@ export default function Home() {
             Math Made <span className="text-[hsl(280,100%,70%)]">Easy</span>
           </h1>
           <div className="text text-white">
-              π/ Take a photo of your math problem and get step-by-step solutions instantly /π
+            π/ Take a photo of your math problem and get step-by-step solutions instantly /π
           </div>
         </div>
 
-        <div className="flex justify-center">
-          <UploadDropzone
-            options={options}
-            onUpdate={({ uploadedFiles }) => {
-              console.log('Uploading ', uploadedFiles.map((x) => x.fileUrl).join('\n'));
-            }}
-            width="600px"
-            height="375px"
+        <div className="card flex justify-content-center text-white text-5xl">
+          <Toast ref={toast}></Toast>
+          <FileUpload
+            mode="basic"
+            name="math_tutor[]"
+            accept="image/*"
+            maxFileSize={1000000}
+            auto
+            chooseLabel="Upload Screenshot"
+            customUpload
+            uploadHandler={openApiUploader}
           />
         </div>
       </main>
