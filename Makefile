@@ -1,8 +1,10 @@
 all:
 	npm run dev
 
-bootstrap: .env
+bootstrap: 
 	npm i
+	npm run db:generate
+	npm run db:migrate
 
 .env: .env.gpg
 	@echo "Passphrase is (ask the developer)"
