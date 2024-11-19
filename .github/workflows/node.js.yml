@@ -20,15 +20,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - env:
-        GNUPG_PASSPHRASE: ${{ secrets.GNUPG_PASSPHRASE }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm install
-    - run: gpg --passphrase $GNUPG_PASSPHRASE -d .env.gpg > .env
-    - run: npm run lint
-    - run: npm run build --if-present
-    - run: npm test
+    - name: Build and test
+      env: 
+        GNUPG_PASSPHRASE: ${{ secrets.GNUPG_PASSPHRASE }}
+      run: |
+        npm install
+        gpg --passphrase $GNUPG_PASSPHRASE -d .env.gpg > .env
+        npm run lint
+        npm run build --if-present
+        npm test
