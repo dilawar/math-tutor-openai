@@ -11,4 +11,4 @@ lint check:
 
 .env: .env.gpg
 	@echo "Passphrase is (ask the developer)"
-	/usr/bin/gpg -d $< -o $@
+	/usr/bin/gpg -d $< > $@
