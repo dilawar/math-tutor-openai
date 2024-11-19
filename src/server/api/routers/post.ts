@@ -16,16 +16,15 @@ export const postRouter = createTRPCRouter({
     console.log('<tutor> base64 image: ', b64img.length);
 
     // Call OpenApi here.
-    var result = '';
+    let result = '';
     try {
-      let resp = await callOpenAIApi(b64img);
+      const resp = await callOpenAIApi(b64img);
       console.log('>> 111> openai response: ', resp);
       result = resp.message.content;
-
     } catch (e: Exception) {
       result = e.Message;
     }
-    console.log("result is: ", result);
+    console.log('result is: ', result);
     return result;
   }),
 

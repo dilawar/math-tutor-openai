@@ -1,22 +1,27 @@
 'use client';
 
 import Script from 'next/script';
+import Image from 'next/image';
 
 // This is what I found on npmjs.com. Not sure if it is great or not!
 import { FileUpload } from 'primereact/fileupload';
-import { Toast } from 'primereact/toast';
 
 import { useState } from 'react';
 import { api } from '~/trpc/react';
 
 export function ScreenshotUpload() {
   const [tutorResponse, setTutorResponse] = useState('');
+  const [uploadedFile, setUploadedFile] = useState(null);
 
   const tutorApi = api.post.tutor.useMutation();
 
   const openApiUploader = async (event) => {
     console.log('Uploaded files: ', event.files);
     const file = event.files[0];
+    setUploadedFile(file);
+
+    console.log(' Uploaded file: ', uploadedFile);
+
     const reader = new FileReader();
     reader.readAsDataURL(file);
 
@@ -38,10 +43,20 @@ export function ScreenshotUpload() {
   };
 
   return (
-    <div>
+    <div className="justify">
       <Script
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
         strategy="lazyOnload"></Script>
+
+      {/* Image could not be used because src was set to "" */}
+      <Image
+        alt={uploadedFile?.name}
+        role="presentation"
+        src={uploadedFile?.objectURL ?? 'data:,'}
+        width={400}
+        height={200}
+        className="w-{300px}"></Image>
+
       <FileUpload
         className="py-2 ease-in-out text-white rounded"
         mode="basic"
