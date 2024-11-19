@@ -11,6 +11,14 @@ export const postRouter = createTRPCRouter({
       };
     }),
 
+ upload: publicProcedure
+    .mutation(async (image) => {
+        console.log("Got image", image);
+        return {
+            msg: "Needs to handle image",
+        };
+    }),
+
   create: publicProcedure
     .input(z.object({ name: z.string().min(1) }))
     .mutation(async ({ ctx, input }) => {
