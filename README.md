@@ -1,3 +1,12 @@
+Input image
+
+![](./data/quad.png)
+
+Response 
+
+![](./data/screenshot-20241119.png)
+
+
 ## How to deploy
 
 - `make env` will generate .env from .env.gpg. Use the passphrase sent to use
