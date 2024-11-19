@@ -23,12 +23,15 @@ export function ScreenshotUpload() {
     reader.onloadend = function () {
       const binData = reader.result;
       console.log('Uploaded image: ', binData);
-      // send this to the server using api.
+
+      // Send this to the server using api.
       setTutorResponse('Waiting for tutor response');
 
+      // console.log('111', event.target);
       tutorApi.mutate(binData, {
           onSuccess: (resp) => {
               setTutorResponse(resp);
+              event.target.clear();
           }
       });
 
@@ -47,10 +50,11 @@ export function ScreenshotUpload() {
               maxFileSize={10000000}
               multiple={false}
               chooseLabel="Browse/Take Photo"
+              auto
               customUpload
               uploadHandler={openApiUploader}
           />
-          <div className="py-5">{tutorResponse}</div>
+          <div className="py-5 w-[500px]">{tutorResponse}</div>
       </div>
   );
 }

@@ -11,7 +11,7 @@ export async function callOpenAIApi(b64Image: string) {
         content: [
           {
             type: 'text',
-            text: 'Solve the problem in the image. Show the step-by-step solution. Write a maxima program to verify the solution. Return your response in JSON format.'
+            text: 'Solve the problem in the image. Show the step-by-step solution. Write a maxima program to verify the solution.'
           },
           {
             type: 'image_url',
