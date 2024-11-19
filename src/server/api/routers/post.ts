@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc';
 
+import { callOpenAIApi } from '~/app/common';
+
 export const postRouter = createTRPCRouter({
   hello: publicProcedure.input(z.object({ text: z.string() })).query(({ input }) => {
     return {
@@ -8,24 +10,23 @@ export const postRouter = createTRPCRouter({
     };
   }),
 
-  upload: publicProcedure.mutation(async (opts) => {
-    // entries in the FormData.
-    console.log("path", opts.path);
-    const formData = await opts.getRawInput();
-    console.log("form data", formData);
+  // Tutor response
+  tutor: publicProcedure.mutation(async (opts) => {
+    const b64img = await opts.getRawInput();
+    console.log('<tutor> base64 image: ', b64img.length);
 
-    let reader = new FileReader();
-    for(var image of formData.values()) {
-        console.log("form data image: ", image.data);
-        const b64 = reader.readAsDataURL(image);
-        console.log(" image b64: ", b64);
+    // Call OpenApi here.
+    var result = '';
+    try {
+      let resp = await callOpenAIApi(b64img);
+      console.log('>> 111> openai response: ', resp);
+      result = resp.message.content;
+
+    } catch (e: Exception) {
+      result = e.Message;
     }
-
-
-
-    return {
-      msg: 'Got file'
-    };
+    console.log("result is: ", result);
+    return result;
   }),
 
   create: publicProcedure
