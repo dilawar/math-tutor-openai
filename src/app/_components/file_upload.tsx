@@ -1,5 +1,7 @@
 'use client';
 
+import Script from 'next/script';
+
 // This is what I found on npmjs.com. Not sure if it is great or not!
 import { FileUpload } from 'primereact/fileupload';
 import { Toast } from 'primereact/toast';
@@ -29,32 +31,33 @@ export function ScreenshotUpload() {
 
       // console.log('111', event.target);
       tutorApi.mutate(binData, {
-          onSuccess: (resp) => {
-              setTutorResponse(resp);
-              event.target.clear();
-          }
+        onSuccess: (resp) => {
+          setTutorResponse(resp);
+          event.target.clear();
+        }
       });
-
     };
-
   };
 
   return (
-      <div>
-          <FileUpload
-              className="py-2 ease-in-out text-white rounded"
-              mode="basic"
-              name="math_tutor[]"
-              id="screenshot_uploader"
-              accept="image/*"
-              maxFileSize={10000000}
-              multiple={false}
-              chooseLabel="Browse/Take Photo"
-              auto
-              customUpload
-              uploadHandler={openApiUploader}
-          />
-          <div className="py-5 w-[500px]">{tutorResponse}</div>
-      </div>
+    <div>
+      <Script
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+        strategy="lazyOnload"></Script>
+      <FileUpload
+        className="py-2 ease-in-out text-white rounded"
+        mode="basic"
+        name="math_tutor[]"
+        id="screenshot_uploader"
+        accept="image/*"
+        maxFileSize={10000000}
+        multiple={false}
+        chooseLabel="Browse/Take Photo"
+        auto
+        customUpload
+        uploadHandler={openApiUploader}
+      />
+      <div className="py-5 w-[500px]">{tutorResponse}</div>
+    </div>
   );
 }
