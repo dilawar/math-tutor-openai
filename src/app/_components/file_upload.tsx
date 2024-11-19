@@ -15,7 +15,7 @@ export function ScreenshotUpload() {
 
   const tutorApi = api.post.tutor.useMutation();
 
-  const openApiUploader = async (event) => {
+  const openApiUploader = async (event: React.ChangeEvent<HtmlInputElement>) => {
     console.log('Uploaded files: ', event.files);
     const file = event.files[0];
     setUploadedFile(file);
