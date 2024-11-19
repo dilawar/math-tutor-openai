@@ -6,10 +6,10 @@ import Link from 'next/link';
 import { FileUpload } from 'primereact/fileupload';
 import { Toast } from 'primereact/toast';
 
-// import { api } from '~/utils/api';
+import { api } from '~/utils/api';
 
 export default function Home() {
-  // const hello = api.post.hello.useQuery({ text: 'from tRPC' });
+  const hello = api.post.hello.useQuery({ text: 'from tRPC' });
   const toast = useRef(null);
 
   const openApiUploader = async (event) => {
@@ -46,15 +46,13 @@ export default function Home() {
           <Toast ref={toast}></Toast>
           <FileUpload
             mode="basic"
-            url="api/upload"
+            url="/api/trpc/post.upload"
             name="math_tutor[]"
             id="screenshot_uploader"
             accept="image/*"
             maxFileSize={1000000}
             multiple={false}
             chooseLabel="Browse/Take Photo"
-            customUpload
-            uploadHandler={openApiUploader}
           />
         </div>
       </main>
