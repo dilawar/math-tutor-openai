@@ -16,7 +16,7 @@ export function ScreenshotUpload() {
 
   const tutorApi = api.post.tutor.useMutation();
 
-  const clearImage = (event) => {
+  const clearImage = () => {
     console.log('Button to clear image is pressed.');
     setUploadedFile(null);
   };
