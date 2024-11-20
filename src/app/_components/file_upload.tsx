@@ -6,7 +6,8 @@ import Script from 'next/script';
 import Image from 'next/image';
 import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
-import Markdown from 'react-markdown';
+
+import { MathpixMarkdown, MathpixLoader } from 'mathpix-markdown-it';
 
 import { api } from '~/trpc/react';
 
@@ -16,10 +17,10 @@ export function ScreenshotUpload() {
 
   const tutorApi = api.post.tutor.useMutation();
 
-  const clearImage = (event ) => {
-      console.log("Button to clear image is pressed.");
-      setUploadedFile(null);
-  }
+  const clearImage = (event) => {
+    console.log('Button to clear image is pressed.');
+    setUploadedFile(null);
+  };
 
   const openApiUploader = async (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log('Uploaded files: ', event.files);
@@ -50,10 +51,6 @@ export function ScreenshotUpload() {
 
   return (
     <div>
-      <Script
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-        strategy="lazyOnload"></Script>
-
       {/* Image could not be used because src was set to "" */}
       <Image
         alt={uploadedFile?.name ?? 'Unnamed image'}
@@ -76,12 +73,12 @@ export function ScreenshotUpload() {
           customUpload
           uploadHandler={openApiUploader}></FileUpload>
 
-      <Button label="Clear Image" outlined severity="warning" onClick={clearImage} />
+        <Button label="Clear Image" outlined severity="warning" onClick={clearImage} />
       </div>
 
       <hr />
-      <div className="py-10 w-[500px]">
-        <Markdown>{tutorResponse}</Markdown>
+      <div className="py-10 w-[700px]">
+        <MathpixMarkdown text={tutorResponse}></MathpixMarkdown>
       </div>
     </div>
   );
