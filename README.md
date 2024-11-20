@@ -20,3 +20,7 @@
   different. Writing html in JS vs write JS in HTML different!
 
 Daily logs: https://www.notion.so/dilawars/Astral-Take-Home-142e579bff8980f79cd4dfdc1f2afa3f?pvs=4
+
+# More samples
+
+![image](https://github.com/user-attachments/assets/f742c5e3-96e8-4121-8625-f13382bd40c2)
