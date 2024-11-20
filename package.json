@@ -13,7 +13,8 @@
     "postinstall": "prisma generate",
     "lint": "eslint .",
     "start": "next start",
-    "fix": "eslint . --fix"
+    "fix": "eslint . --fix",
+    "fmt": "prettier -w src"
   },
   "dependencies": {
     "@bytescale/upload-widget-react": "^4.19.0",
@@ -30,6 +31,7 @@
     "primereact": "^10.8.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-markdown": "^9.0.1",
     "server-only": "^0.0.1",
     "superjson": "^2.2.1",
     "zod": "^3.23.3"

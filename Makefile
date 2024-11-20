@@ -9,6 +9,9 @@ bootstrap:
 lint check:
 	npm run lint
 
+fmt:
+	npm run fmt
+
 .env: .env.gpg
 	@echo "Passphrase is (ask the developer)"
 	/usr/bin/gpg -d $< > $@
