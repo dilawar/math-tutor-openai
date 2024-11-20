@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 
-import Script from 'next/script';
 import Image from 'next/image';
 import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
@@ -78,7 +77,9 @@ export function ScreenshotUpload() {
 
       <hr />
       <div className="py-10 w-[700px]">
-        <MathpixMarkdown text={tutorResponse}></MathpixMarkdown>
+        <MathpixLoader>
+          <MathpixMarkdown text={tutorResponse}></MathpixMarkdown>
+        </MathpixLoader>
       </div>
     </div>
   );
