@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import Script from 'next/script';
 import Image from 'next/image';
+import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
 import Markdown from 'react-markdown';
 
@@ -14,6 +15,11 @@ export function ScreenshotUpload() {
   const [uploadedFile, setUploadedFile] = useState(null);
 
   const tutorApi = api.post.tutor.useMutation();
+
+  const clearImage = (event ) => {
+      console.log("Button to clear image is pressed.");
+      setUploadedFile(null);
+  }
 
   const openApiUploader = async (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log('Uploaded files: ', event.files);
@@ -43,11 +49,10 @@ export function ScreenshotUpload() {
   };
 
   return (
-    <div className="justify">
+    <div>
       <Script
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-        strategy="lazyOnload"
-      ></Script>
+        strategy="lazyOnload"></Script>
 
       {/* Image could not be used because src was set to "" */}
       <Image
@@ -56,23 +61,26 @@ export function ScreenshotUpload() {
         src={uploadedFile?.objectURL ?? 'data:,'}
         width={400}
         height={200}
-        className="w-{300px}"
-      ></Image>
+        className="w-{300px}"></Image>
 
-      <FileUpload
-        className="py-2 ease-in-out text-white rounded"
-        mode="basic"
-        name="math_tutor[]"
-        id="screenshot_uploader"
-        accept="image/*"
-        maxFileSize={10000000}
-        multiple={false}
-        chooseLabel="Browse/Take Photo"
-        auto
-        customUpload
-        uploadHandler={openApiUploader}
-      />
-      <div className="py-5 w-[500px]">
+      <div className="flex grid grid-cols-2 gap-4">
+        <FileUpload
+          mode="basic"
+          name="math_tutor[]"
+          id="screenshot_uploader"
+          accept="image/*"
+          maxFileSize={10000000}
+          multiple={false}
+          chooseLabel="Browse/Take Photo"
+          auto
+          customUpload
+          uploadHandler={openApiUploader}></FileUpload>
+
+      <Button label="Clear Image" outlined severity="warning" onClick={clearImage} />
+      </div>
+
+      <hr />
+      <div className="py-10 w-[500px]">
         <Markdown>{tutorResponse}</Markdown>
       </div>
     </div>
