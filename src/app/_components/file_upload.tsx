@@ -6,7 +6,7 @@ import Image from 'next/image';
 // This is what I found on npmjs.com. Not sure if it is great or not!
 import { FileUpload } from 'primereact/fileupload';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { api } from '~/trpc/react';
 
 export function ScreenshotUpload() {

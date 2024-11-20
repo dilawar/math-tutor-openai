@@ -11,7 +11,7 @@
     "db:studio": "prisma studio",
     "dev": "next dev",
     "postinstall": "prisma generate",
-    "lint": "next lint",
+    "lint": "eslint .",
     "start": "next start",
     "fix": "eslint . --fix"
   },
@@ -42,7 +42,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
-    "@typescript-eslint/parser": "^7.1.1",
+    "@typescript-eslint/parser": "^7.18.0",
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.4",
     "eslint-config-prettier": "^9.1.0",
