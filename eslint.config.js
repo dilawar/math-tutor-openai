@@ -9,7 +9,6 @@ export default [
   { ignores: ['.config/*', '.next/*', 'node_moduels/*'] },
   {
     languageOptions: {
-      ...pluginReact.configs.flat.recommended.languageOptions,
       globals: { ...globals.browser, ...globals.node }
     }
   },
