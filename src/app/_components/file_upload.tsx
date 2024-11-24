@@ -20,8 +20,8 @@ export function ScreenshotUpload() {
   const clearImage = () => {
     console.log('Button to clear image is pressed.');
     console.log(' fileUploadRef: ', fileUploadRef);
-    if(fileUploadRef) {
-        fileUploadRef.current.clear();
+    if (fileUploadRef) {
+      fileUploadRef.current.clear();
     }
     setUploadedFile(null);
   };
@@ -63,7 +63,8 @@ export function ScreenshotUpload() {
         src={uploadedFile?.objectURL ?? 'data:,'}
         width={400}
         height={200}
-        className="w-{300px}"></Image>
+        className="w-{300px}"
+      ></Image>
 
       <div className="flex grid grid-cols-2 gap-4">
         <FileUpload
@@ -77,7 +78,8 @@ export function ScreenshotUpload() {
           chooseLabel="Browse Image"
           auto
           customUpload
-          uploadHandler={openApiUploader}></FileUpload>
+          uploadHandler={openApiUploader}
+        ></FileUpload>
 
         <Button label="Clear Image" outlined severity="warning" onClick={clearImage} />
       </div>

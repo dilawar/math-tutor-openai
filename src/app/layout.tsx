@@ -1,6 +1,6 @@
 import React from 'react';
 import '~/styles/globals.css';
-import "primereact/resources/themes/lara-light-cyan/theme.css";
+import 'primereact/resources/themes/lara-light-cyan/theme.css';
 
 import { GeistSans } from 'geist/font/sans';
 import { type Metadata } from 'next';
