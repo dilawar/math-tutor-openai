@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import Image from 'next/image';
 import { Button } from 'primereact/button';
@@ -13,14 +13,20 @@ import { api } from '~/trpc/react';
 export function ScreenshotUpload() {
   const [tutorResponse, setTutorResponse] = useState('Tutor response');
   const [uploadedFile, setUploadedFile] = useState(null);
+  const fileUploadRef = useRef(null);
 
   const tutorApi = api.post.tutor.useMutation();
 
   const clearImage = () => {
     console.log('Button to clear image is pressed.');
+    console.log(' fileUploadRef: ', fileUploadRef);
+    if(fileUploadRef) {
+        fileUploadRef.current.clear();
+    }
     setUploadedFile(null);
   };
 
+  // Upload screenshot to OneAPI.
   const openApiUploader = async (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log('Uploaded files: ', event.files);
     const file = event.files[0];
@@ -61,13 +67,14 @@ export function ScreenshotUpload() {
 
       <div className="flex grid grid-cols-2 gap-4">
         <FileUpload
+          ref={fileUploadRef}
           mode="basic"
           name="math_tutor[]"
           id="screenshot_uploader"
           accept="image/*"
           maxFileSize={10000000}
           multiple={false}
-          chooseLabel="Browse/Take Photo"
+          chooseLabel="Browse Image"
           auto
           customUpload
           uploadHandler={openApiUploader}></FileUpload>
