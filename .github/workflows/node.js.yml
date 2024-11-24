@@ -26,9 +26,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Build and test
-      env: 
-        GNUPG_PASSPHRASE: ${{ secrets.GNUPG_PASSPHRASE }}
       run: |
         npm install
-        gpg --passphrase $GNUPG_PASSPHRASE --pinentry-mode=loopback -d .env.gpg > .env
         npm run lint
