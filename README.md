@@ -1,7 +1,8 @@
+![image](https://github.com/user-attachments/assets/f742c5e3-96e8-4121-8625-f13382bd40c2)
+
 ## A Math Tutor
 
-Upload a screenshot of math problem and let OpenAI solve it for you -- step by
-step.
+Upload a screenshot of math problem and let OpenAI solve it for you -- step by step.
 
 A NextJS + React + tRPC project.
 
@@ -11,10 +12,7 @@ A NextJS + React + tRPC project.
 
 ## Building
 
-- Get your OpenAI key.  Add to .env file. See `.env.example` file.
-- `make bootstrap` should install all deps.
-- `make` should launch the app.
-
-# Samples
-
-![image](https://github.com/user-attachments/assets/f742c5e3-96e8-4121-8625-f13382bd40c2)
+- Add your [OpenAI key](https://platform.openai.com/docs/overview). Add to .env file. See
+  `.env.example` file.
+- `make bootstrap` installs deps.
+- `make` launches the app.
